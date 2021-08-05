@@ -7,6 +7,14 @@
         border: 1px solid black;
     }
 
+    .search-container{
+        width: 90%;
+        height: 60px;
+        position: relative;
+        margin: 50px;
+        border: 1px solid black;
+    }
+
     .box {
         width: 242px;
         height: 190px;
@@ -56,6 +64,9 @@
         margin-top:100px;
         font-size:50px;
     }
+    .search{
+        width:60%;
+    }
 
 </style>
 
@@ -66,16 +77,20 @@
             <img class="defaultImage" src='https://file.ontraport.com/media/b712827cbaa4477581a0051c2438ba8e.phpjzvfqm?Expires=1785699963&Signature=O~~S6YI4W~Tlq~eyzlFDTWIupmv7~VYCjSAb4lPMRkjEwrNdHncYIRnklKUKX4V6wxO97xxGdzj6xnu4kxIjmgKWF2E2bma4rSdBFFgq3eI98erFSfn6JAI7QEfSrbiEM9ysJhelPyQyWXfcAxK~KbWVcG0fzjYiOaTbWd-1Sc3bkL8iFtHPiMbpjXpqopMFzC9Q7tbgPZrqhnFn4SjMBsP311VJj8VPMVz1pVEMDNYl9-32a4D3D1-KxwDNRHf4vgPWHB1yquKzXH1cjQrUWxt~Lsupwgcjqz-TYjO2Na0XgLdc3ur2X8D3J53lZIHtEUW5ZoI1nkXuDGkOXbFTRw__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA' alt='template' />
         </div>
         <div id='misinfo-box' class="box stack-top">
-            <img alt='missing' id='misinfo-picture' src=></img>
+            <img alt='Incorrect URL' id='misinfo-picture' src=></img>
         </div>
         <button onclick = 'changeImageRight()' id='image-selection-right'>></button>
         <button onclick = 'changeImageLeft()' id='image-selection-left'><</button>
+    </div>
+    <div class = "search-container">
+            <input type="text" id="urlInput" class="search"><br>
+            <button onclick="addImage()" type="submit">ADD URL</button>
     </div>
 </div>
 
 <script>
 
-    sources = ['https://file.ontraport.com/media/54a68ed3e15d4923bb81d84ed833d615.phpfaasvm?Expires=1785701299&Signature=GKjPLw4f4mNkDJBXY4XD~AOyiUYsikKV7iQpafT7SeY2nxm~EV3qyLmV8e-D6dY9OjyickVuRc~GtbW6vpObqmeDNvhWt-o46zh5~GE0BRtvRhW6yBh-XMlfGV7a6D0YfuMjS9nxfQEganN9fm0jt-Ohu5ja2F~a0iiFfNUiOctVd9daqnGzTxwtPp0agJlcMY64pAKMBAUKZyB-7AzdhNnYbX9MQxL3AKZgKBS00kSTEMj4ahXUs0OIJ4KBui4jff86BXHvBvEPt2Hxm4I65Tz01l~0N0sOeSgwvdcrLcrvW21TZ1X9h8ADu5OVJ8eGHKKM3SCKXWzCdxiDEDxFhA__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
+    sources = [
                 'https://file.ontraport.com/media/711e856905ae4e9590e2e881e9739c5c.phpzzs9zg?Expires=1785701321&Signature=ZZLPS7cDQ7m6ASI4jYOqZ3QMDL7X1PRXo2u7xJS9P11vuDYw0~Nkm3E2ZZPSmEqFas2nm4KKAwO~BsVJHIZZPqSZ3SpHVfOfjiIm6gDh~6kUz~IDJDOQzmki-M~BagV9VX8itk9svpSlcw26NIyNi7WdA4CTyzVDi-9vAnB3bzkunTWbmd30HZtSOIbMdq4jCxn6ARcr8CZC7aKrFiMEpMx31YVPWmDTP~2-3lvhlubhkAKGLKsin71j1RUnzZ2IcN1T3F-MJNoDGzL9k1TEzi~ZzFxdgp36LVgKF3LKhBwTxEkdAJPYt-QWtPHkNqlfp0dDW5DsJg0ZoYRKp38Ekw__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
                 'https://file.ontraport.com/media/98c8bd61be6d4d38ae0b7a1ff76a0a86.php9gons3?Expires=1785701357&Signature=FrpjAfFQgW~klsT9~gvJ6~xQGCVXY5Pc2wTfAYhLMdYHdWb91pfyrZwIE4Gq3C9A4thGKo~eJCFCLnny2DcXFcRCpMeMXGaYRF1v9UcusNy1v53~TzA00TEsbEKZ79NJH~HHa7HEvYvzpKAeIGavpUQfD-xHtCVexyPAXZSOCO3sZev-7ypj7reFErKJ1EWJQFi6xA4PT5sqSJgEo85gm1tHceQb7nMqa3bbVeadpwVF6r2xevWHAQNuXpe-RmprZehoijAaZ0ADIGs03f4btH0Fu1i6iMK8gWZN650OvqVWN5ruZwroCK3ghpw2yUbgRkRx7yMutv~nlOmPDTmNBA__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
                 'https://file.ontraport.com/media/a533ab28e71b4e55bf6e7aed63d8ed37.phpsmge7n?Expires=1785701373&Signature=RcnJweUKCnIRkIE6ZUAhyFbbvOJ8LFq5GtM9yNPeucC5siyBRgjcp3-QJ7a7NKxc9e1lV6nizCkoeN26tY8gQ3~IBmhtWieo~1tCVKU06eH6oCYHzMoZ8rTpRKNoBXNmHJmwb2XdT6yS8SarHSyyTNllFl-txxj5lFOFQCd7d-kXM3edZrHxJs70EHJ41KqBT5ZuFqVZhsCTLYZhPQdMy3kAZetGs3NENwXi7UWTrNaP-6MtaX7J0BmKNgmdpqaUZYpArSdBwx3ZnvEglhYmc3rSjsFXl5sYHbiUDEbGMr-dNU4~MCWeaSXO2cFb0BPh6LfSRu7Vlrz5uz3fVlJObw__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
@@ -107,6 +122,11 @@
         }
         image.src = sources[index]
         console.log(index)
+    }
+    
+
+    function addImage(){
+        image.src = document.querySelector('#urlInput').value
     }
 
 </script>
