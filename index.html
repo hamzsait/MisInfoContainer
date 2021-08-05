@@ -39,11 +39,22 @@
         border: 3px white solid;
     }
 
-    #image-selection {
-        width: 400px;
-        height: 400px;
+    #image-selection-right{
+        width: 200px;
+        height: 200px;
         border: 1px solid black;
         float: right;
+        margin-top:100px;
+        margin-right:50px;
+        font-size: 50;
+    }
+    #image-selection-left{
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        float: right;
+        margin-top:100px;
+        font-size:50px;
     }
 
 </style>
@@ -57,7 +68,8 @@
         <div id='misinfo-box' class="box stack-top">
             <img alt='missing' id='misinfo-picture' src=></img>
         </div>
-        <button onclick = 'changeImage()' id='image-selection'>Click Here to Change Photo</button>
+        <button onclick = 'changeImageRight()' id='image-selection-right'>></button>
+        <button onclick = 'changeImageLeft()' id='image-selection-left'><</button>
     </div>
 </div>
 
@@ -67,7 +79,6 @@
                 'https://file.ontraport.com/media/711e856905ae4e9590e2e881e9739c5c.phpzzs9zg?Expires=1785701321&Signature=ZZLPS7cDQ7m6ASI4jYOqZ3QMDL7X1PRXo2u7xJS9P11vuDYw0~Nkm3E2ZZPSmEqFas2nm4KKAwO~BsVJHIZZPqSZ3SpHVfOfjiIm6gDh~6kUz~IDJDOQzmki-M~BagV9VX8itk9svpSlcw26NIyNi7WdA4CTyzVDi-9vAnB3bzkunTWbmd30HZtSOIbMdq4jCxn6ARcr8CZC7aKrFiMEpMx31YVPWmDTP~2-3lvhlubhkAKGLKsin71j1RUnzZ2IcN1T3F-MJNoDGzL9k1TEzi~ZzFxdgp36LVgKF3LKhBwTxEkdAJPYt-QWtPHkNqlfp0dDW5DsJg0ZoYRKp38Ekw__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
                 'https://file.ontraport.com/media/98c8bd61be6d4d38ae0b7a1ff76a0a86.php9gons3?Expires=1785701357&Signature=FrpjAfFQgW~klsT9~gvJ6~xQGCVXY5Pc2wTfAYhLMdYHdWb91pfyrZwIE4Gq3C9A4thGKo~eJCFCLnny2DcXFcRCpMeMXGaYRF1v9UcusNy1v53~TzA00TEsbEKZ79NJH~HHa7HEvYvzpKAeIGavpUQfD-xHtCVexyPAXZSOCO3sZev-7ypj7reFErKJ1EWJQFi6xA4PT5sqSJgEo85gm1tHceQb7nMqa3bbVeadpwVF6r2xevWHAQNuXpe-RmprZehoijAaZ0ADIGs03f4btH0Fu1i6iMK8gWZN650OvqVWN5ruZwroCK3ghpw2yUbgRkRx7yMutv~nlOmPDTmNBA__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
                 'https://file.ontraport.com/media/a533ab28e71b4e55bf6e7aed63d8ed37.phpsmge7n?Expires=1785701373&Signature=RcnJweUKCnIRkIE6ZUAhyFbbvOJ8LFq5GtM9yNPeucC5siyBRgjcp3-QJ7a7NKxc9e1lV6nizCkoeN26tY8gQ3~IBmhtWieo~1tCVKU06eH6oCYHzMoZ8rTpRKNoBXNmHJmwb2XdT6yS8SarHSyyTNllFl-txxj5lFOFQCd7d-kXM3edZrHxJs70EHJ41KqBT5ZuFqVZhsCTLYZhPQdMy3kAZetGs3NENwXi7UWTrNaP-6MtaX7J0BmKNgmdpqaUZYpArSdBwx3ZnvEglhYmc3rSjsFXl5sYHbiUDEbGMr-dNU4~MCWeaSXO2cFb0BPh6LfSRu7Vlrz5uz3fVlJObw__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
-                'https://file.ontraport.com/media/e90834a0d7c043ec90b41b6e2e5d2e06.php5uvfjr?Expires=1785701392&Signature=eQAapVtjj0ZHlMRwRjV5B6qnb7s11Kr9TyQpYAukYz9qnZpMlbTEY~JwwxJRfGDLnrkSya~eltN2-hKA~mwVtjGq9~r-r5KT2N5EwaSAZohqfSoyuE6Y18ciWWxSIHjcWebrlzx3zflMAUk9-0GscJk3Of0QlaugOGQCDvzXREHWv-K6r3nNEgs~MBBFEyRzk~zFXUTmxkjgJY3H4yfQe3I-04HOjXnSueFjlEGEfBObo3vtVN14-3L~T0-kWJKO1kqYYM3wuLmkWSCqZQ8guCOEmpUursk16hBnhQtnGsDpYzXepchNfeqR~Zib01iIRmOa0mu2lZHvg6I7mixZGg__&Key-Pair-Id=APKAJVAAMVW6XQYWSTNA',
               ]
 
     image = document.querySelector('#misinfo-picture')
@@ -75,13 +86,24 @@
 
     button = document.querySelector('#image-selection')
     
+
     index = 0
-    function changeImage(){
-        if (index > 3){
+    function changeImageRight(){
+        if (index >= sources.length -1){
             index = 0
         }
         else{
             index++
+        }
+        image.src = sources[index]
+        console.log(index)
+    }
+    function changeImageLeft(){
+        if (index <= 0){
+            index = sources.length - 1
+        }
+        else{
+            index--
         }
         image.src = sources[index]
         console.log(index)
